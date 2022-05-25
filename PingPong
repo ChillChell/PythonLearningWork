@@ -6,9 +6,7 @@ from time import time as timer
  
 #фоновая музыка
 mixer.init()
-mixer.music.load('pong.ogg')
-mixer.music.play()
-plob_sound = mixer.Sound('score.ogg')
+plob_sound = mixer.Sound('pong.ogg')
 
 #Картинки
 img_bg = "Background.jpeg" #фон игры
@@ -53,7 +51,6 @@ class Player(GameSprite):
            self.rect.y += self.speed
 
 class Ball(GameSprite):
-    
     def movement(self):
         global speed_x, speed_y
         ball.rect.x += speed_x
@@ -67,11 +64,9 @@ class Ball(GameSprite):
         if ball.rect.x < 0 or ball.rect.x > win_width:
             ball.rect.x = 350
             ball.rect.y = 250
+            #Метод Choice случайно выбирает одно из двух значений, для того чтобы мяч при появление в исходной точки летел в разные направления.
             speed_x *= random.choice((-1,1))
             speed_y *= random.choice((-1,1))
-
-    
-
 
 #создаем окошко
 win_width = 700
@@ -111,11 +106,5 @@ while run:
         ball.reset()
 
         display.update()
-
-    
-    #бонус: автоматический перезапуск игры
-    else:
-        finish = False
-   
     #цикл срабатывает каждую 0.05 секунд
     time.delay(50)
